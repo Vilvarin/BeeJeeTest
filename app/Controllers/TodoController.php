@@ -67,7 +67,7 @@ final class TodoController extends Controller
             $oldInput = $this->body;
         }
 
-        $isAdmin = $_SESSION['username'] === 'admin';
+        $isAdmin = isset($_SESSION['username']) && $_SESSION['username'] === 'admin';
 
         return $this->render('todos', [
             'items' => $todoItems,
