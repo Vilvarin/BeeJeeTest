@@ -5,6 +5,7 @@
 /** @var array $oldInput */
 /** @var array $validationErrors */
 /** @var bool $isAdmin */
+/** @var bool $taskCreated */
 
 $tableView = new \App\View('todo_table');
 $formView = new \App\View('todo_form');
@@ -32,6 +33,14 @@ $formView = new \App\View('todo_form');
         'isAdmin' => $isAdmin,
     ]); ?>
 </div>
+
+<?php if ($taskCreated) { ?>
+    <div class="row">
+        <div class="text-success">
+            Task was successfully created
+        </div>
+    </div>
+<?php } ?>
 
 <div class="row">
     <?= $formView->render([

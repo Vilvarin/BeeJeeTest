@@ -26,12 +26,14 @@ final class TodoController extends Controller
     public function store()
     {
         $validationErrors = $this->validateBody();
+        $taskCreated = false;
 
         if (empty($validationErrors)) {
             $this->insertTodoItem();
+            $taskCreated = true;
         }
 
-        return $this->renderTodosPage($validationErrors);
+        return $this->renderTodosPage($validationErrors, $taskCreated);
     }
 
     /**
@@ -52,8 +54,10 @@ final class TodoController extends Controller
         return $this->renderTodosPage();
     }
 
-    private function renderTodosPage($validationErrors = [])
-    {
+    private function renderTodosPage(
+        array $validationErrors = [],
+        bool $taskCreated = false
+    ) {
         $pager = new Paginator($this->query, $this->connection);
         $todoItems = $this->selectTodoItems($pager->offset);
 
@@ -72,6 +76,7 @@ final class TodoController extends Controller
             'validationErrors' => $validationErrors,
             'oldInput' => $oldInput,
             'isAdmin' => $isAdmin,
+            'taskCreated' => $taskCreated,
         ]);
     }
 
