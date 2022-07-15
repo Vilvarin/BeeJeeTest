@@ -76,7 +76,7 @@
                               action="/update"
                         >
                             <input type="hidden" name="id" value="<?= $item->id ?>" />
-                            <button type="submit">Сохранить</button>
+                            <button class="btn btn-secondary" type="submit">Сохранить</button>
                         </form>
                     <?php } ?>
                 </td>
